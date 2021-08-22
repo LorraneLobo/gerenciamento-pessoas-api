@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class PessoaController {
 
     @GetMapping
-    public String getMessage(){
+    public String getPessoa(){
+
         return "Hello!";
     }
 }
