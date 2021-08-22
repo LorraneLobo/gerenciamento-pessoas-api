@@ -29,9 +29,8 @@ public class Pessoa {
     @Column(nullable = false, unique = true)
     private String cpf;
 
-    @Column
     private LocalDate dataNascimento;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
-    List<Telefone> telefones;
+    private List<Telefone> telefones;
 }
