@@ -32,4 +32,9 @@ public class PessoaController {
     public void create(@RequestBody @Valid PessoaDTO pessoaDTO){
         pessoaService.createPessoa(pessoaDTO);
     }
+
+    @PutMapping(path = "/{id}")
+    public PessoaDTO updateById(@PathVariable Long id, @RequestBody PessoaDTO pessoaDTO){
+        return pessoaService.updateById(id, pessoaDTO);
+    }
 }

@@ -24,12 +24,6 @@ public class PessoaService {
                 .map(pessoaMapper::toDTO)
                 .collect(Collectors.toList());
     }
-//    public MessageResponseDTO createPerson(PersonDTO personDTO) {
-//        Person personToSave = personMapper.toModel(personDTO);
-//
-//        Person savedPerson = personRepository.save(personToSave);
-//        return createMessageResponse(savedPerson.getId(), "Created person with ID ");
-//    }
 
     public PessoaDTO findById(long id) {
         Pessoa pessoa = verifyIfExists(id);
@@ -39,6 +33,13 @@ public class PessoaService {
     public void createPessoa(PessoaDTO pessoaDTO){
         Pessoa pessoa = pessoaMapper.toModel(pessoaDTO);
         pessoaRepository.save(pessoa);
+    }
+
+    public PessoaDTO updateById(Long id, PessoaDTO pessoaDTO){
+        verifyIfExists(id);
+        Pessoa pessoa = pessoaMapper.toModel(pessoaDTO);
+        pessoa.setId(id);
+        return pessoaMapper.toDTO(pessoaRepository.save(pessoa));
     }
 
     private Pessoa verifyIfExists(Long id) {
