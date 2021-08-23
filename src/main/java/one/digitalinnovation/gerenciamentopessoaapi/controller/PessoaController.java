@@ -4,11 +4,11 @@ import one.digitalinnovation.gerenciamentopessoaapi.dto.request.PessoaDTO;
 import one.digitalinnovation.gerenciamentopessoaapi.entity.Pessoa;
 import one.digitalinnovation.gerenciamentopessoaapi.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -24,7 +24,13 @@ public class PessoaController {
     }
 
     @GetMapping(path = "/{id}")
-    public Pessoa findById(@PathVariable Long id){
-        return this.pessoaService.findById(id);
+    public ResponseEntity<PessoaDTO> findById(@PathVariable Long id){
+        return ResponseEntity.ok(this.pessoaService.findById(id));
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public void create(@RequestBody @Valid PessoaDTO pessoaDTO){
+        pessoaService.createPessoa(new Pessoa(pessoaDTO));
     }
 }

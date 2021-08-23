@@ -22,8 +22,25 @@ public class PessoaService {
                 .map(PessoaDTO::new)
                 .collect(Collectors.toList());
     }
-    public Pessoa findById(long id) {
-        return this.pessoaRepository.findById(id).orElseThrow(() -> new RuntimeException("Não achou"));
+
+//    public MessageResponseDTO createPerson(PersonDTO personDTO) {
+//        Person personToSave = personMapper.toModel(personDTO);
+//
+//        Person savedPerson = personRepository.save(personToSave);
+//        return createMessageResponse(savedPerson.getId(), "Created person with ID ");
+//    }
+
+    public PessoaDTO findById(long id) {
+        Pessoa pessoa = verifyIfExists(id);
+        return new PessoaDTO(pessoa);
     }
 
+    public void createPessoa(Pessoa pessoa){
+        pessoaRepository.save(pessoa);
+    }
+
+    private Pessoa verifyIfExists(Long id) {
+        return pessoaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Pessoa nao encontrada"));
+    }
 }
