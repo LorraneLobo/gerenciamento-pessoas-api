@@ -1,7 +1,6 @@
 package one.digitalinnovation.gerenciamentopessoaapi.controller;
 
 import one.digitalinnovation.gerenciamentopessoaapi.dto.request.PessoaDTO;
-import one.digitalinnovation.gerenciamentopessoaapi.entity.Pessoa;
 import one.digitalinnovation.gerenciamentopessoaapi.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,6 +30,6 @@ public class PessoaController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestBody @Valid PessoaDTO pessoaDTO){
-        pessoaService.createPessoa(new Pessoa(pessoaDTO));
+        pessoaService.createPessoa(pessoaDTO);
     }
 }

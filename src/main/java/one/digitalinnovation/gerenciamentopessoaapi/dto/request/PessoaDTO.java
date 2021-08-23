@@ -4,14 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import one.digitalinnovation.gerenciamentopessoaapi.entity.Pessoa;
 import one.digitalinnovation.gerenciamentopessoaapi.entity.Telefone;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -34,18 +32,10 @@ public class PessoaDTO {
     @CPF
     private String cpf;
 
-    private LocalDate dataNascimento;
+    private String dataNascimento;
 
     @Valid
     @NotEmpty
     private List<Telefone> telefones;
 
-    public PessoaDTO(Pessoa pessoa) {
-        this.id = pessoa.getId();
-        this.nome = pessoa.getNome();
-        this.sobrenome = pessoa.getSobrenome();
-        this.cpf = pessoa.getCpf();
-        this.dataNascimento = pessoa.getDataNascimento();
-        this.telefones = pessoa.getTelefones();
-    }
 }

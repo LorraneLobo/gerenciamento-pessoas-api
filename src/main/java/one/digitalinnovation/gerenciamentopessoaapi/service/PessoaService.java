@@ -3,6 +3,7 @@ package one.digitalinnovation.gerenciamentopessoaapi.service;
 import lombok.AllArgsConstructor;
 import one.digitalinnovation.gerenciamentopessoaapi.dto.request.PessoaDTO;
 import one.digitalinnovation.gerenciamentopessoaapi.entity.Pessoa;
+import one.digitalinnovation.gerenciamentopessoaapi.mapper.PessoaMapper;
 import one.digitalinnovation.gerenciamentopessoaapi.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,15 +15,15 @@ import java.util.stream.Collectors;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class PessoaService {
 
-    private PessoaRepository pessoaRepository;
+    private final PessoaRepository pessoaRepository;
+    private final PessoaMapper pessoaMapper;
 
     public List<PessoaDTO> findAll(){
         List<Pessoa> allPessoa = pessoaRepository.findAll();
         return allPessoa.stream()
-                .map(PessoaDTO::new)
+                .map(pessoaMapper::toDTO)
                 .collect(Collectors.toList());
     }
-
 //    public MessageResponseDTO createPerson(PersonDTO personDTO) {
 //        Person personToSave = personMapper.toModel(personDTO);
 //
@@ -32,10 +33,11 @@ public class PessoaService {
 
     public PessoaDTO findById(long id) {
         Pessoa pessoa = verifyIfExists(id);
-        return new PessoaDTO(pessoa);
+        return pessoaMapper.toDTO(pessoa);
     }
 
-    public void createPessoa(Pessoa pessoa){
+    public void createPessoa(PessoaDTO pessoaDTO){
+        Pessoa pessoa = pessoaMapper.toModel(pessoaDTO);
         pessoaRepository.save(pessoa);
     }
 
