@@ -42,8 +42,13 @@ public class PessoaService {
         return pessoaMapper.toDTO(pessoaRepository.save(pessoa));
     }
 
+    public void deleteById(Long id){
+        verifyIfExists(id);
+        pessoaRepository.deleteById(id);
+    }
+
     private Pessoa verifyIfExists(Long id) {
         return pessoaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Pessoa nao encontrada"));
+                .orElseThrow(() -> new RuntimeException("Pessoa nao encontrada com o ID informado!"));
     }
 }

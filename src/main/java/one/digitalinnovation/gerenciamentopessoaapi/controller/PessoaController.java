@@ -37,4 +37,10 @@ public class PessoaController {
     public PessoaDTO updateById(@PathVariable Long id, @RequestBody PessoaDTO pessoaDTO){
         return pessoaService.updateById(id, pessoaDTO);
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteById(@PathVariable Long id){
+        pessoaService.deleteById(id);
+    }
 }
