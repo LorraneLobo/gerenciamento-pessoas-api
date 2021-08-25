@@ -11,7 +11,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/pessoa", value = "/api/pessoa")
+@RequestMapping(path = "/api/pessoas", value = "/api/pessoas")
 public class PessoaController {
 
     @Autowired
